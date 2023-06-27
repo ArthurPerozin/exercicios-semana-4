@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Calculadora de média escolar</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Média</h2>
+        <form id="calc-form" class="form-control">
+            <label for="fgts">Média</label>
+            <input type="number" step="0.01" id="n1" placeholder="Informe sua primeira nota">
+            <input type="number" step="0.01" id="n2" placeholder="Informe sua segunda nota">
+            <input type="number" step="0.01" id="n3" placeholder="Informe sua terceira nota">
+            
+            <p id="error-message" class="error-message"></p>
+            <button id="calcular" class="calcular">Calcular</button>
+            <button id="limpar" class="limpar" type="button">Limpar</button>
+        </form>
+    </div>
+</body>
+</html>

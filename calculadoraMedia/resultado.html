@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Resultado da Média</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado da Média</h2>
+        <p id="resultado"></p>
+        <br>
+        <button class="btn_voltar" onclick="voltar()">Voltar</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultadoElement = document.getElementById('resultado');
+            const media = parseFloat(localStorage.getItem('media'));
+            const resultado = localStorage.getItem('resultado');
+
+            if (isNaN(media)) {
+                resultadoElement.textContent = 'Valor inválido';
+            } else {
+                resultadoElement.textContent = `Média: ${media.toFixed(2)} (${resultado})`;
+            }
+        });
+
+        function voltar() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
