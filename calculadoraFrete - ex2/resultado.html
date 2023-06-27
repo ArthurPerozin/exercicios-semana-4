@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Resultado</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado</h2>
+        <br>
+        <p>Valor do frete: R$ <span id="valor-frete"></span></p><br>
+        <button class="btn_voltar" onclick="voltar()">Voltar</button>
+    </div>
+
+    <script>
+        // Função para obter os parâmetros da URL
+        function obterParametrosURL() {
+            const parametros = {};
+            const queryString = window.location.search.substring(1);
+            const pares = queryString.split('&');
+            pares.forEach((par) => {
+                const partes = par.split('=');
+                const chave = decodeURIComponent(partes[0]);
+                const valor = decodeURIComponent(partes[1]);
+                parametros[chave] = valor;
+            });
+            return parametros;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        const valorFrete = parseFloat(urlParams.get('frete'));
+        const valorFreteElement = document.getElementById('valor-frete');
+
+if (isNaN(valorFrete)) {
+    valorFreteElement.textContent = 'Valor do frete inválido';
+}else{
+    valorFreteElement.textContent = valorFrete.toFixed(2);
+}
+});
+
+
+        // Função para voltar à página anterior
+        function voltar() {
+            window.history.back();
+        }
+
+        window.addEventListener('DOMContentLoaded');
+    </script>
+</body>
+</html>

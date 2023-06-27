@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Resultado</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado</h2>
+        <br>
+        <p>FGTS: R$ <span id="fgts"></span></p>
+        <p>INSS: R$ <span id="inss"></span></p>
+        <p>Imposto de Renda: R$ <span id="ir"></span></p>
+        <p>Salário Líquido: R$ <span id="salario-liquido"></span></p>
+        <br>
+        <button class="btn_voltar" onclick="voltar()">Voltar</button>
+    </div>
+
+    <script>
+        // Função para obter os parâmetros da URL
+        function obterParametrosURL() {
+            const parametros = {};
+            const queryString = window.location.search.substring(1);
+            const pares = queryString.split('&');
+            pares.forEach((par) => {
+                const partes = par.split('=');
+                const chave = decodeURIComponent(partes[0]);
+                const valor = decodeURIComponent(partes[1]);
+                parametros[chave] = valor;
+            });
+            return parametros;
+        }
+
+        // Função para definir os valores dos impostos nos campos de texto
+        function exibirValoresImpostos() {
+            const parametros = obterParametrosURL();
+            const fgtsElement = document.getElementById('fgts');
+            const inssElement = document.getElementById('inss');
+            const irElement = document.getElementById('ir');
+            const salarioLiquidoElement = document.getElementById('salario-liquido');
+
+            if (parametros.fgts) {
+                fgtsElement.textContent = Number(parametros.fgts).toFixed(2);
+            }
+
+            if (parametros.inss) {
+                inssElement.textContent = Number(parametros.inss).toFixed(2);
+            }
+
+            if (parametros.impostoRenda) {
+                irElement.textContent = Number(parametros.impostoRenda).toFixed(2);
+            }
+
+            if (parametros.salarioLiquido) {
+                salarioLiquidoElement.textContent = Number(parametros.salarioLiquido).toFixed(2);
+            }
+        }
+
+        // Função para voltar à página anterior
+        function voltar() {
+            window.history.back();
+        }
+
+        // Chame a função para exibir os valores dos impostos ao carregar a página
+        window.addEventListener('DOMContentLoaded', exibirValoresImpostos);
+    </script>
+</body>
+</html>

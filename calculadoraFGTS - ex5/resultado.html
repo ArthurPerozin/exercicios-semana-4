@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Resultado</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado</h2>
+        <br>
+        <p>Seu FGTS mensal será de: R$ <span id="fgtsMensal"></span></p><br>
+        <p>Seu FGTS anual será de: R$ <span id="fgtsAnual"></span></p>
+        <br>
+        <button class="btn_voltar" onclick="voltar()">Voltar</button>
+    </div>
+
+    <script>
+        function obterParametrosURL() {
+            const parametros = {};
+            const queryString = window.location.search.substring(1);
+            const pares = queryString.split('&');
+            pares.forEach((par) => {
+                const partes = par.split('=');
+                const chave = decodeURIComponent(partes[0]);
+                const valor = decodeURIComponent(partes[1]);
+                parametros[chave] = valor;
+            });
+            return parametros;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const queryParams = obterParametrosURL();
+            const fgtsMensal = parseFloat(queryParams.fgtsMensal);
+            const fgtsAnual = parseFloat(queryParams.fgtsAnual);
+            
+            const fgtsMensalElement = document.getElementById('fgtsMensal');
+            const fgtsAnualElement = document.getElementById('fgtsAnual');
+
+            if (isNaN(fgtsMensal) || isNaN(fgtsAnual)) {
+                fgtsMensalElement.textContent = 'Valor inválido';
+                fgtsAnualElement.textContent = 'Valor inválido';
+            } else {
+                fgtsMensalElement.textContent = fgtsMensal.toFixed(2);
+                fgtsAnualElement.textContent = fgtsAnual.toFixed(2);
+            }
+        });
+        // Função para voltar à página anterior
+        function voltar() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
