@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lanchonete</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>  
+  <div class="container">
+    <h2>Menu</h2>
+    <table>
+      <tr>
+        <th>Código</th>
+        <th>Produto</th>
+        <th>Valor</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Hambúrguer</td>
+        <td>R$10,00</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Batata Frita</td>
+        <td>R$5,00</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Refrigerante</td>
+        <td>R$3,00</td>
+      </tr>
+    </table><br><br>
+    
+    <form>
+      <input type="number" id="codigo" placeholder="Digite o código do alimento">
+      <input type="number" id="quantidade" placeholder="Digite a quantidade">
+      
+      <button type="button" onclick="adicionarItem()">Adicionar</button>
+      <button type="button" onclick="limparCampos()">Limpar</button>
+    </form>
+    
+    <div id="itens-selecionados">
+      <table id="lista-itens">
+        <tr>
+          <th>Código</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
+        </tr>
+      </table>
+    </div>
+    
+    <button onclick="calcularTotal()">Calcular</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
