@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Resultado do IMC</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado do IMC</h2>
+        <br>
+        <p>Seu IMC é: <span id="resultado"></span></p>
+        <p>Status do IMC: <span id="status-imc"></span></p>
+        <br>
+        <button class="btn_voltar" onclick="voltar()">Voltar</button>
+    </div>
+
+    <script>
+        // Função para obter os parâmetros da URL
+        function obterParametrosURL() {
+            const parametros = {};
+            const queryString = window.location.search.substring(1);
+            const pares = queryString.split('&');
+            pares.forEach((par) => {
+                const partes = par.split('=');
+                const chave = decodeURIComponent(partes[0]);
+                const valor = decodeURIComponent(partes[1]);
+                parametros[chave] = valor;
+            });
+            return parametros;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const queryParams = obterParametrosURL();
+            const imc = parseFloat(queryParams.imc);
+            const resultadoElement = document.getElementById('resultado');
+            const statusIMCElement = document.getElementById('status-imc');
+
+            if (isNaN(imc)) {
+                resultadoElement.textContent = 'Valor do IMC inválido';
+                statusIMCElement.textContent = 'Status do IMC indisponível';
+            } else {
+                resultadoElement.textContent = imc.toFixed(2);
+                if (imc < 18.5) {
+                    statusIMCElement.textContent = 'Abaixo do peso';
+                } else if (imc >= 18.5 && imc < 25) {
+                    statusIMCElement.textContent = 'Peso ideal';
+                } else {
+                    statusIMCElement.textContent = 'Acima do peso';
+                }
+            }
+        });
+
+        // Função para voltar à página anterior
+        function voltar() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

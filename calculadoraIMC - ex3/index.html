@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Calculadora de IMC</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de IMC</h2>
+        <form id="calc-form" class="form-control">
+            <label for="peso">IMC</label>
+            <input type="number" step="0.01" id="peso" placeholder="Informe seu peso">
+            <input type="number" step="0.01" id="altura" placeholder="Informe sua altura">
+            <p id="error-message" class="error-message"></p>
+            <button id="calcular" class="calcular">Calcular</button>
+            <button id="limpar" class="limpar" type="button">Limpar</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('calc-form');
+            const peso = document.getElementById('peso');
+            const altura = document.getElementById('altura');
+            const errorMessage = document.getElementById('error-message');
+            const limparButton = document.getElementById('limpar');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                calcularIMC();
+            });
+
+            limparButton.addEventListener('click', function() {
+                peso.value = '';
+                altura.value = '';
+                errorMessage.textContent = '';
+            });
+
+            function calcularIMC() {
+                const pesoValue = parseFloat(peso.value.replace(',', '.'));
+
+                if (isNaN(pesoValue) || pesoValue <= 0) {
+                    errorMessage.textContent = 'Por favor, insira um peso válido para o cálculo.';
+                    return;
+                }
+
+                const alturaValue = parseFloat(altura.value.replace(',', '.'));
+
+                if (isNaN(alturaValue) || alturaValue <= 0) {
+                    errorMessage.textContent = 'Por favor, insira uma altura válida para o cálculo.';
+                    return;
+                }
+
+                const imc = pesoValue / (alturaValue * alturaValue);
+
+                let statusIMC = '';
+                if (imc < 18.5) {
+                    statusIMC = 'Abaixo do peso';
+                } else if (imc >= 18.5 && imc < 25) {
+                    statusIMC = 'Peso ideal';
+                } else {
+                    statusIMC = 'Acima do peso';
+                }
+
+                const resultadoElement = document.getElementById('resultado');
+                resultadoElement.textContent = `Seu IMC é ${imc.toFixed(2)}. ${statusIMC}`;
+            }
+        });
+    </script>
+</body>
+</html>
