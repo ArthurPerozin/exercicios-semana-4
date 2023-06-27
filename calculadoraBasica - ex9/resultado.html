@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resultado da Calculadora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+  <h2>Resultado da Calculadora</h2>
+  
+  <p id="resultado"></p><br>
+  <button class="btn_voltar" onclick="voltar()">Voltar</button>
+  </div>    
+  <script>
+    // Obter o resultado da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const resultado = urlParams.get('resultado');
+    
+    // Exibir o resultado na página
+    document.getElementById("resultado").innerHTML = "Resultado: " + resultado;
+
+    function voltar() {
+            window.history.back();
+        }
+  </script>
+</body>
+</html>
